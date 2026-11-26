@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>경영관리 AI 데모 · 실버파워(Silverpower)</title>
+  <meta name="description" content="경영관리 AI 대시보드의 실제 화면을 가상 데이터로 직접 체험해 보세요. 메인 대시보드, 계획 대비 실적, 팀별 손익, 재무현황, AI 어시스턴트까지." />
+  <meta property="og:title" content="경영관리 AI 데모 · 실버파워" />
+  <meta property="og:description" content="경영관리 AI 대시보드의 실제 화면을 가상 데이터로 체험해 보세요." />
+  <meta property="og:type" content="website" />
+  <link rel="icon" href="/favicon.ico" />
+  <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.19/dist/full.min.css" rel="stylesheet" type="text/css" />
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <link rel="stylesheet" href="/assets/management-ai-demo.css" />
+</head>
+<body class="bg-base-200">
+  <div class="demo-shell">
+    <div class="demo-banner">
+      <div class="demo-banner-text">
+        <span class="demo-badge">DEMO</span>
+        <span>경영관리 AI 체험 화면 <b class="hidden sm:inline">· 표시되는 데이터는 모두 가상 데이터입니다.</b></span>
+      </div>
+      <div class="demo-banner-links">
+        <a href="/services/management-ai/">소개 페이지</a>
+        <a class="demo-banner-cta" href="mailto:thehunss@gmail.com?subject=%EA%B2%BD%EC%98%81%EA%B4%80%EB%A6%AC%20AI%20%EB%8F%84%EC%9E%85%20%EB%AC%B8%EC%9D%98">도입 문의</a>
+      </div>
+    </div>
+
+    <div class="demo-body">
+      <div id="sidebar-backdrop" class="demo-backdrop" hidden></div>
+
+      <!-- 왼쪽 사이드바 -->
+      <aside id="sidebar" class="demo-sidebar bg-base-100 shadow-lg">
+        <div class="p-4 border-b flex items-center justify-between shrink-0">
+          <a href="#main" class="flex items-center text-xl font-bold">
+            <i class="ph ph-chart-line-up" style="font-size: 24px;"></i>
+            <span class="ml-2">비즈니스 대시보드</span>
+          </a>
+          <button type="button" id="sidebar-close" class="btn btn-ghost btn-sm lg:hidden" title="메뉴 닫기">
+            <i class="ph ph-x" style="font-size: 20px;"></i>
+          </button>
+        </div>
+        <ul class="menu p-4 w-full flex-1 overflow-y-auto min-h-0" id="demo-menu">
+          <li><a href="#main" data-route="main"><i class="ph ph-house"></i><span>메인</span></a></li>
+          <li>
+            <details data-group>
+              <summary><i class="ph ph-storefront"></i><span>판매</span></summary>
+              <ul>
+                <li><a href="#material" data-route="material"><i class="ph ph-chart-pie"></i><span>판매 요약</span></a></li>
+                <li><a href="#sales" data-route="sales"><i class="ph ph-chart-line"></i><span>판매 분석</span></a></li>
+              </ul>
+            </details>
+          </li>
+          <li>
+            <details data-group>
+              <summary><i class="ph ph-factory"></i><span>생산</span></summary>
+              <ul>
+                <li><a href="#production" data-route="production"><i class="ph ph-chart-line"></i><span>라인별 생산량, 원단위</span></a></li>
+                <li><a href="#processing-cost" data-route="processing-cost"><i class="ph ph-calculator"></i><span>라인별 가공비</span></a></li>
+                <li><a href="#processing-cost-summary" data-route="processing-cost-summary"><i class="ph ph-calculator"></i><span>라인별 가공비(요약)</span></a></li>
+                <li><a href="#processing-cost-total" data-route="processing-cost-total"><i class="ph ph-calculator"></i><span>총제조비용</span></a></li>
+                <li><a href="#utility" data-route="utility"><i class="ph ph-lightning"></i><span>유틸리티</span></a></li>
+                <li><a href="#waste" data-route="waste"><i class="ph ph-trash"></i><span>폐기 비용</span></a></li>
+              </ul>
+            </details>
+          </li>
+          <li>
+            <details data-group>
+              <summary><i class="ph ph-shopping-cart"></i><span>구매</span></summary>
+              <ul>
+                <li><a href="#purchase" data-route="purchase"><i class="ph ph-chart-line"></i><span>원재료 매입 분석</span></a></li>
+              </ul>
+            </details>
+          </li>
+          <li>
+            <details data-group>
+              <summary><i class="ph ph-trend-up"></i><span>손익</span></summary>
+              <ul>
+                <li><a href="#team-profit" data-route="team-profit"><i class="ph ph-table"></i><span>팀별 손익 현황</span></a></li>
+                <li><a href="#margin-profit" data-route="margin-profit"><i class="ph ph-chart-line-down"></i><span>한계이익 분석</span></a></li>
+                <li><a href="#plan-vs-actual" data-route="plan-vs-actual"><i class="ph ph-chart-bar"></i><span>계획 대비 실적</span></a></li>
+              </ul>
+            </details>
+          </li>
+          <li>
+            <details data-group>
+              <summary><i class="ph ph-currency-circle-dollar"></i><span>재무</span></summary>
+              <ul>
+                <li><a href="#finance" data-route="finance"><i class="ph ph-bank"></i><span>재무현황</span></a></li>
+              </ul>
+            </details>
+          </li>
+          <li>
+            <details data-group>
+              <summary><i class="ph ph-warehouse"></i><span>재고</span></summary>
+              <ul>
+                <li><a href="#inventory" data-route="inventory"><i class="ph ph-chart-pie"></i><span>재고 분석</span></a></li>
+                <li><a href="#inventory-price" data-route="inventory-price"><i class="ph ph-chart-line"></i><span>재고 단가 분석</span></a></li>
+                <li><a href="#team-inventory" data-route="team-inventory"><i class="ph ph-table"></i><span>팀별 제품 재고 현황</span></a></li>
+              </ul>
+            </details>
+          </li>
+          <li>
+            <details data-group>
+              <summary><i class="ph ph-buildings"></i><span>동종사</span></summary>
+              <ul>
+                <li><a href="#peer" data-route="peer"><i class="ph ph-chart-bar"></i><span>동종사 경영실적</span></a></li>
+              </ul>
+            </details>
+          </li>
+          <li>
+            <details data-group>
+              <summary><i class="ph ph-users-three"></i><span>인사</span></summary>
+              <ul>
+                <li><a href="#headcount" data-route="headcount"><i class="ph ph-users"></i><span>인원현황</span></a></li>
+              </ul>
+            </details>
+          </li>
+        </ul>
+        <div class="p-4 border-t border-base-300 shrink-0">
+          <button type="button" id="gpt-open" class="btn btn-block gap-2 demo-gpt-btn">
+            <i class="ph ph-robot" style="font-size: 18px;"></i>
+            <span>AI 어시스턴트</span>
+          </button>
+        </div>
+      </aside>
+
+      <!-- 메인 컨텐츠 -->
+      <div class="demo-main">
+        <header class="navbar bg-base-100 border-b border-base-300 px-4 min-h-14 shrink-0">
+          <div class="flex-1">
+            <button type="button" id="sidebar-open" class="btn btn-ghost btn-sm lg:hidden" title="메뉴 열기">
+              <i class="ph ph-list" style="font-size: 20px;"></i>
+              <span>메뉴</span>
+            </button>
+          </div>
+          <div class="flex-none flex items-center gap-1">
+            <span class="text-sm text-base-content/70 px-2 hidden sm:inline">demo</span>
+            <button type="button" class="btn btn-ghost btn-sm" data-demo-only>계정</button>
+            <button type="button" class="btn btn-ghost btn-sm hidden sm:inline-flex" data-demo-only>사용자 관리</button>
+            <button type="button" class="btn btn-ghost btn-sm" data-demo-only>로그아웃</button>
+          </div>
+        </header>
+        <main id="view" class="demo-view" tabindex="-1"></main>
+      </div>
+    </div>
+  </div>
+
+  <!-- AI 어시스턴트 패널 -->
+  <div id="gpt-backdrop" class="fixed inset-0 bg-black/30 z-[55]" hidden></div>
+  <aside id="gpt-panel" class="gpt-panel bg-base-100 shadow-2xl border-l border-base-300 flex flex-col overflow-hidden" aria-hidden="true">
+    <div class="flex items-center justify-between gap-2 px-4 py-3 border-b border-base-300 shrink-0">
+      <div class="min-w-0">
+        <h2 class="font-semibold text-base truncate" id="gpt-title">AI 어시스턴트</h2>
+        <p class="text-xs text-base-content/60 truncate">데이터 Mode · 자연어로 DB 조회</p>
+      </div>
+      <div class="flex items-center gap-1 shrink-0">
+        <button type="button" class="btn btn-ghost btn-sm" title="이전 대화" data-demo-only>
+          <i class="ph ph-clock-counter-clockwise" style="font-size: 16px;"></i>
+        </button>
+        <button type="button" id="gpt-new" class="btn btn-ghost btn-sm" title="새 채팅">
+          <i class="ph ph-plus" style="font-size: 16px;"></i>
+        </button>
+        <button type="button" id="gpt-close" class="btn btn-ghost btn-sm" title="닫기">
+          <i class="ph ph-x" style="font-size: 16px;"></i>
+        </button>
+      </div>
+    </div>
+    <div id="gpt-messages" class="flex-1 overflow-y-auto p-4 space-y-4 min-h-0 bg-base-100"></div>
+    <div class="border-t border-base-300 p-3 shrink-0">
+      <form id="gpt-form" class="flex gap-2 items-end">
+        <textarea id="gpt-input" class="textarea textarea-bordered w-full min-h-[2.75rem] max-h-32 text-sm resize-none" rows="1" placeholder="질문을 입력하세요..."></textarea>
+        <button type="submit" id="gpt-send" class="btn btn-circle shrink-0 demo-gpt-btn" disabled>
+          <i class="ph ph-paper-plane-tilt" style="font-size: 16px;"></i>
+        </button>
+      </form>
+      <p class="text-[11px] text-base-content/50 mt-2 text-center">같은 대화창에서는 이전 질문을 이어서 물어볼 수 있습니다.</p>
+    </div>
+  </aside>
+
+  <div id="demo-toast" class="toast toast-center toast-bottom z-[70]" hidden>
+    <div class="alert alert-info text-sm"><span id="demo-toast-text"></span></div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <script src="/assets/management-ai-demo.js"></script>
+</body>
+</html>
