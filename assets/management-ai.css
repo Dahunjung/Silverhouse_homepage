@@ -273,6 +273,7 @@
 .ma-feature-alt { background: linear-gradient(180deg, #eef0f3 0, var(--bg) 100%); }
 
 .ma-feature-grid { display: grid; gap: 40px; align-items: center; }
+.ma-feature-grid > * { min-width: 0; }
 
 .ma-tag {
   margin: 0 0 14px;
@@ -612,6 +613,10 @@
   .ma-side { display: none; }
   .ma-kpi b { font-size: 13px; }
   .ma-pva-rate { display: none; }
+  .ma-table-panel { padding: 16px 12px; }
+  .ma-table { min-width: 0; font-size: 12px; }
+  .ma-table th { padding: 8px 4px; font-size: 11px; }
+  .ma-table td { padding: 9px 4px; }
   .ma-fin-cards { gap: 6px; }
   .ma-fin-card { padding: 10px; }
   .ma-fin-card b { font-size: 1.15rem; }
